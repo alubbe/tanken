@@ -53,13 +53,12 @@ public class MapKit extends CordovaPlugin {
             	@Override
                 public void run() {
                     double latitude = 0, longitude = 0;
-                    int height = 460;
-                    boolean atBottom = false;
+                    int marginTop = 200, marginBottom = 150;
                     try {
-                        height = options.getInt("height");
+                        marginTop = options.getInt("marginTop");
+                        marginBottom = options.getInt("marginBottom");
                         latitude = options.getDouble("lat");
                         longitude = options.getDouble("lon");
-                        atBottom = options.getBoolean("atBottom");
                     } catch (JSONException e) {
                         LOG.e(TAG, "Error reading options");
                     }
@@ -79,16 +78,12 @@ public class MapKit extends CordovaPlugin {
                     }
 
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, height);
-                    if (atBottom) {
-                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
+                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                    params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
                                 RelativeLayout.TRUE);
-                    } else {
-                        params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
-                                RelativeLayout.TRUE);
-                    }
                     params.addRule(RelativeLayout.CENTER_HORIZONTAL,
                             RelativeLayout.TRUE);
+                    params.setMargins(0, marginTop, 0, marginBottom);
 
                     mapView.setLayoutParams(params);
                     mapView.onCreate(null);

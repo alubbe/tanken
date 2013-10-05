@@ -94,9 +94,8 @@ var app = {
         };
         
         var options = {
-            height: 460,
-            diameter: 1000,
-            atBottom: true,
+            marginTop: 60,
+            marginBottom: 100,
             lat: -22.999521,
             lon: -43.344600
         };
