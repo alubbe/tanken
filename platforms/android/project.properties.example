@@ -12,4 +12,5 @@
 
 # Project target.
 target=android-17
-android.library.reference.1=../../../../adt-bundle-linux-x86_64-20130917/sdk/extras/google/google_play_services/libproject/google-play-services_lib/ #THIS PATH MUST BE RELATIVE
+android.library.reference.1=../../../../adt-bundle-linux-x86_64-20130917/sdk/extras/google/google_play_services/libproject/google-play-services_lib/
+#THE ABOVE PATH MUST BE RELATIVE AND THERE MUST BE NO WHITESPACE AT THE END
