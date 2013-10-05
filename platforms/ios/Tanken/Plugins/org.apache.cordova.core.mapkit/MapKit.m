@@ -35,10 +35,12 @@
     //This is the Designated Initializer
 
     // defaults
-    float height = ([options objectForKey:@"height"]) ? [[options objectForKey:@"height"] floatValue] : self.webView.bounds.size.height/2;
-    float width = ([options objectForKey:@"width"]) ? [[options objectForKey:@"width"] floatValue] : self.webView.bounds.size.width;
+    float marginTop = ([options objectForKey:@"marginTop"]) ? [[options objectForKey:@"marginTop"] floatValue] : 200;
+    float marginBottom = ([options objectForKey:@"marginBottom"]) ? [[options objectForKey:@"marginBottom"] floatValue] : 200;
+    float height = self.webView.bounds.size.height - marginTop - marginBottom;
+    float width = self.webView.bounds.size.width;
     float x = self.webView.bounds.origin.x;
-    float y = self.webView.bounds.origin.y;
+    float y = self.webView.bounds.origin.y + marginTop;
     BOOL atBottom = ([options objectForKey:@"atBottom"]) ? [[options objectForKey:@"atBottom"] boolValue] : NO;
 
     if(atBottom) {
