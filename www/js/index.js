@@ -45,5 +45,91 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+    },
+    showMap: function() {
+        var pins = [
+            {
+                lat: -22.999658,
+                lon: -43.353827,
+                title: "A Cool Title",
+                snippet: "A Really Cool Snippet",
+                image: {
+                    type: "asset",
+                    resource: "www/img/logo.png",
+                  width: 50,
+                  height: 50
+                },
+                icon: MapKit.iconColors.HUE_ROSE
+            },
+            {
+                lat: -22.999780,
+                lon: -43.348087,
+                title: "A Cool Title, with no Snippet",
+                icon: {
+                  type: "asset",
+                  resource: "www/img/logo.png", //an image in the asset directory
+                  pinColor: MapKit.iconColors.HUE_VIOLET //iOS only
+                }
+            },
+            {
+                lat: -22.998180,
+                lon: -43.359003,
+                title: "Awesome Title",
+                snippet: "Awesome Snippet",
+                icon: MapKit.iconColors.HUE_GREEN
+            }
+        ];
+        var error = function() {
+          console.log('error');
+        };
+        var success = function() {
+          document.getElementById('hide_map').style.display = 'block';
+          document.getElementById('show_map').style.display = 'none';
+          MapKit.addMapPins(pins, function() { 
+                                      console.log('adMapPins success');  
+                                      document.getElementById('clear_map_pins').style.display = 'block';
+                                  },
+                                  function() { console.log('error'); });
+        };
+        
+        var options = {
+            height: 460,
+            diameter: 1000,
+            atBottom: true,
+            lat: -22.999521,
+            lon: -43.344600
+        };
+        
+        MapKit.showMap(options, success, error);
+    },
+    hideMap: function() {
+        var success = function() {
+          document.getElementById('hide_map').style.display = 'none';
+          document.getElementById('clear_map_pins').style.display = 'none';
+          document.getElementById('show_map').style.display = 'block';
+        };
+        var error = function() {
+          console.log('error');
+        };
+        MapKit.hideMap(success, error);
+    },
+    clearMapPins: function() {
+        var success = function() {
+          console.log('Map Pins cleared!');
+        };
+        var error = function() {
+          console.log('error');
+        };
+        MapKit.clearMapPins(success, error);
+    },
+    changeMapType: function() {
+      var success = function() {
+          console.log('Map Type Changed');
+        };
+        var error = function() {
+          console.log('error');
+        };
+        MapKit.changeMapType(MapKitMapType.MAP_TYPE_SATELLITE, success, error);
     }
 };
