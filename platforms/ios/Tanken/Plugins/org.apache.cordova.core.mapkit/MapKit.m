@@ -41,10 +41,9 @@
     float width = self.webView.bounds.size.width;
     float x = self.webView.bounds.origin.x;
     float y = self.webView.bounds.origin.y + marginTop;
-    BOOL atBottom = ([options objectForKey:@"atBottom"]) ? [[options objectForKey:@"atBottom"] boolValue] : NO;
 
-    if(atBottom) {
-        y += self.webView.bounds.size.height - height;
+    if ([options objectForKey:@"markerCallback"]) {
+        self.buttonCallback=[[options objectForKey:@"markerCallback"] description];
     }
 
     self.childView = [[UIView alloc] initWithFrame:CGRectMake(x,y,width,height)];

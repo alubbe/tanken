@@ -36,8 +36,11 @@ MapKit.prototype = {
 
 	changeMapType: function(mapType, success, error) {
 		exec(success, error, 'MapKit', 'changeMapType', [mapType ? { "mapType": mapType } :{ "mapType": 0 }]);
-	}
+	},
 
+	markerCallback: function(marker) {
+      alert("Marker pressed!");
+    }
 }
 
 module.exports = new MapKit();

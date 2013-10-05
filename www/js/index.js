@@ -96,6 +96,7 @@ var app = {
         var options = {
             marginTop: 60,
             marginBottom: 100,
+            markerCallback: 'MapKit.markerCallback',
             lat: -22.999521,
             lon: -43.344600
         };
