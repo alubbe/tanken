@@ -19,6 +19,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
@@ -96,7 +97,19 @@ public class MapKit extends CordovaPlugin {
                             CameraUpdateFactory.newLatLngZoom(new LatLng(
                                     latitude, longitude), 15));
                     
-                    mapView.getMap().setInfoWindowAdapter(new MapKitInfoWindow(mapkit));
+                    //disabling the infoWindow since this app will not use them
+                    //mapView.getMap().setInfoWindowAdapter(new MapKitInfoWindow(mapkit));
+
+                    // instead, invoke a JS callback whenever a marker gets touched
+                    mapView.getMap().setOnMarkerClickListener(new OnMarkerClickListener() {
+                        
+                        public boolean onMarkerClick(Marker marker) {
+                            LOG.e(TAG, "marker touched");
+                            webView.loadUrl("javascript:window.alert('Marker touched!')");
+                            return true;
+                        }
+                    });
+
                     
                     cCtx.success();
                 }
