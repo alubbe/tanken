@@ -27,7 +27,7 @@ platforms/ios/build/*
 xcuserdata
 profile
 *.moved-aside
-platforms/ios/IOS/www/
+platforms/ios/www/
 
 # OSX
 .DS_Store
