@@ -1,4 +1,6 @@
-plugins/
+plugins/*
+!plugins/android.json
+!plugins/ios.json
 
 # Java class files
 *.class
@@ -14,6 +16,7 @@ project.properties
 
 # IOS / Xcode
 platforms/ios/build/*
+platforms/ios/CordovaLib/build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
