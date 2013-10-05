@@ -1,0 +1,1 @@
+{"prepare_queue":{"installed":[],"uninstalled":[]},"config_munge":{"framework":{"MapKit.framework":{"false":1}},"config.xml":{"/widget":{"<feature name=\"MapKit\"><param name=\"ios-package\" value=\"MapKitView\" /></feature>":1}}},"installed_plugins":{"org.apache.cordova.core.mapkit":{"PACKAGE_NAME":"com.lubbe.tanken"}},"dependent_plugins":{}}
