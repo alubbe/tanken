@@ -1,7 +1,3 @@
-plugins/*
-!plugins/android.json
-!plugins/ios.json
-
 # Java class files
 *.class
 
