@@ -84,8 +84,6 @@ var app = {
           console.log('error');
         };
         var success = function() {
-          document.getElementById('hide_map').style.display = 'block';
-          document.getElementById('show_map').style.display = 'none';
           MapKit.addMapPins(pins, function() { 
                                       console.log('adMapPins success');  
                                       document.getElementById('clear_map_pins').style.display = 'block';
@@ -94,13 +92,13 @@ var app = {
         };
         
         var options = {
-            marginTop: 60,
-            marginBottom: 100,
+            marginTop: $("#top-area").height(),
+            marginBottom: $("#bottom-area").height(),
             markerCallback: 'MapKit.markerCallback',
             lat: -22.999521,
             lon: -43.344600
         };
-        
+
         MapKit.showMap(options, success, error);
     },
     hideMap: function() {
