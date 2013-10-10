@@ -37,19 +37,13 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
         console.log('Received Event: ' + id);
-
+        app.showMap();
     },
     showMap: function() {
         var pins = [
             {
+                id: 0,
                 lat: -22.999658,
                 lon: -43.353827,
                 title: "A Cool Title",
@@ -63,6 +57,7 @@ var app = {
                 icon: MapKit.iconColors.HUE_ROSE
             },
             {
+                id: 1,
                 lat: -22.999780,
                 lon: -43.348087,
                 title: "A Cool Title, with no Snippet",
@@ -73,6 +68,7 @@ var app = {
                 }
             },
             {
+                id: 2,
                 lat: -22.998180,
                 lon: -43.359003,
                 title: "Awesome Title",
