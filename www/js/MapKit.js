@@ -24,7 +24,7 @@ if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)
 
  	MapKit.prototype = {
  		showMap: function(options, success, error) {
-			var initialGMapslatlng = new google.maps.LatLng(options.lat, options.lon);
+			var initialGMapslatlng = new google.maps.LatLng(options.lat, options.lng);
 
 			var mapOptions = {
 			  zoom: 12,

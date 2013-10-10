@@ -19,6 +19,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,20 +47,19 @@ public class MapKit extends CordovaPlugin {
 
     public void showMap(final JSONObject options) {
         try {
-        	final MapKit me = this;
-        	
+            final MapKit me = this;
+            
             cordova.getActivity().runOnUiThread(new Runnable() {
                 MapKit mapkit = me;
-            	@Override
+                @Override
                 public void run() {
                     double latitude = 0, longitude = 0;
-                    int height = 460;
-                    boolean atBottom = false;
+                    int marginTop = 200, marginBottom = 150;
                     try {
-                        height = options.getInt("height");
+                        marginTop = options.getInt("marginTop");
+                        marginBottom = options.getInt("marginBottom");
                         latitude = options.getDouble("lat");
-                        longitude = options.getDouble("lon");
-                        atBottom = options.getBoolean("atBottom");
+                        longitude = options.getDouble("lng");
                     } catch (JSONException e) {
                         LOG.e(TAG, "Error reading options");
                     }
@@ -79,16 +79,12 @@ public class MapKit extends CordovaPlugin {
                     }
 
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, height);
-                    if (atBottom) {
-                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
+                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                    params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
                                 RelativeLayout.TRUE);
-                    } else {
-                        params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
-                                RelativeLayout.TRUE);
-                    }
                     params.addRule(RelativeLayout.CENTER_HORIZONTAL,
                             RelativeLayout.TRUE);
+                    params.setMargins(0, marginTop, 0, marginBottom);
 
                     mapView.setLayoutParams(params);
                     mapView.onCreate(null);
@@ -96,12 +92,32 @@ public class MapKit extends CordovaPlugin {
                                         // than this...
                     main.addView(mapView);
                     
-                    // Moving the map to lot, lon
+                    // Moving the map to lat, lng
                     mapView.getMap().moveCamera(
                             CameraUpdateFactory.newLatLngZoom(new LatLng(
                                     latitude, longitude), 15));
                     
-                    mapView.getMap().setInfoWindowAdapter(new MapKitInfoWindow(mapkit));
+                    //disabling the infoWindow since this app will not use them
+                    //mapView.getMap().setInfoWindowAdapter(new MapKitInfoWindow(mapkit));
+
+                    // instead, invoke a JS callback whenever a marker gets touched
+                    mapView.getMap().setOnMarkerClickListener(new OnMarkerClickListener() {
+                        
+                        public boolean onMarkerClick(Marker marker) {
+                            int marker_id = -1;
+                            JSONObject marker_options = current_pins.get(marker.getId());
+                            try {
+                                marker_id = marker_options.getInt("id");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                cCtx.error("MapKitPlugin::onMarkerClick(): marker ID could not be retrieved");
+                            }
+                            LOG.e(TAG, "marker " + Integer.toString(marker_id) + " touched");
+                            webView.loadUrl("javascript:window.alert('Marker " + Integer.toString(marker_id) + " touched!')");
+                            return true;
+                        }
+                    });
+
                     
                     cCtx.success();
                 }
@@ -149,7 +165,7 @@ public class MapKit extends CordovaPlugin {
                                 double latitude = 0, longitude = 0;
                                 JSONObject options = pins.getJSONObject(i);
                                 latitude = options.getDouble("lat");
-                                longitude = options.getDouble("lon");
+                                longitude = options.getDouble("lng");
 
                                 MarkerOptions mOptions = new MarkerOptions();
 
@@ -172,8 +188,8 @@ public class MapKit extends CordovaPlugin {
                                 // adding Marker
                                 // This is to prevent non existing asset resources to crash the app
                                 try {
-                                	Marker m = mapView.getMap().addMarker(mOptions);
-                                	current_pins.put(m.getId(), options);
+                                    Marker m = mapView.getMap().addMarker(mOptions);
+                                    current_pins.put(m.getId(), options);
                                 } catch(NullPointerException e) {
                                     LOG.e(TAG, "An error occurred when adding the marker. Check if icon exists");
                                 }
@@ -215,14 +231,14 @@ public class MapKit extends CordovaPlugin {
     
     protected BitmapDescriptor getBitmapDescriptor( final JSONObject iconOption, String tagName ) {
         try {
-        	String resource = getResourceFrom(iconOption, tagName);
+            String resource = getResourceFrom(iconOption, tagName);
             if (resource != null) {
-            	return BitmapDescriptorFactory.fromAsset(resource);
+                return BitmapDescriptorFactory.fromAsset(resource);
             } else {
-            	Object o = iconOption.get(tagName);
-            	 if(!o.getClass().getName().equals("org.json.JSONObject" ) ) {
-            		 return BitmapDescriptorFactory.defaultMarker(Float.parseFloat(o.toString()));
-            	 }
+                Object o = iconOption.get(tagName);
+                 if(!o.getClass().getName().equals("org.json.JSONObject" ) ) {
+                     return BitmapDescriptorFactory.defaultMarker(Float.parseFloat(o.toString()));
+                 }
             }
         } catch (JSONException e){
             e.printStackTrace();

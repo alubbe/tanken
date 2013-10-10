@@ -45,7 +45,7 @@ var app = {
             {
                 id: 0,
                 lat: -22.999658,
-                lon: -43.353827,
+                lng: -43.353827,
                 title: "A Cool Title",
                 snippet: "A Really Cool Snippet",
                 image: {
@@ -59,7 +59,7 @@ var app = {
             {
                 id: 1,
                 lat: -22.999780,
-                lon: -43.348087,
+                lng: -43.348087,
                 title: "A Cool Title, with no Snippet",
                 icon: {
                   type: "asset",
@@ -70,7 +70,7 @@ var app = {
             {
                 id: 2,
                 lat: -22.998180,
-                lon: -43.359003,
+                lng: -43.359003,
                 title: "Awesome Title",
                 snippet: "Awesome Snippet",
                 icon: MapKit.iconColors.HUE_GREEN
@@ -92,7 +92,7 @@ var app = {
             marginBottom: $("#bottom-area").height(),
             markerCallback: 'MapKit.markerCallback',
             lat: -22.999521,
-            lon: -43.344600
+            lng: -43.344600
         };
 
         MapKit.showMap(options, success, error);

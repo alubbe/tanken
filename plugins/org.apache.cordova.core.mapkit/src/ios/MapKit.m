@@ -57,7 +57,7 @@
     self.childView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 
-    CLLocationCoordinate2D centerCoord = { [[options objectForKey:@"lat"] floatValue] , [[options objectForKey:@"lon"] floatValue] };
+    CLLocationCoordinate2D centerCoord = { [[options objectForKey:@"lat"] floatValue] , [[options objectForKey:@"lng"] floatValue] };
     CLLocationDistance diameter = [[options objectForKey:@"diameter"] floatValue];
 
     MKCoordinateRegion region=[ self.mapView regionThatFits: MKCoordinateRegionMakeWithDistance(centerCoord,
@@ -108,7 +108,7 @@
   for (int y = 0; y < pins.count; y++)
     {
         NSDictionary *pinData = [pins objectAtIndex:y];
-        CLLocationCoordinate2D pinCoord = { [[pinData objectForKey:@"lat"] floatValue] , [[pinData objectForKey:@"lon"] floatValue] };
+        CLLocationCoordinate2D pinCoord = { [[pinData objectForKey:@"lat"] floatValue] , [[pinData objectForKey:@"lng"] floatValue] };
         NSString *title=[[pinData valueForKey:@"title"] description];
         NSString *subTitle=[[pinData valueForKey:@"snippet"] description];
         NSInteger index=[[pinData valueForKey:@"index"] integerValue];

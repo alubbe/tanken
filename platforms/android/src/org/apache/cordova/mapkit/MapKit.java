@@ -59,7 +59,7 @@ public class MapKit extends CordovaPlugin {
                         marginTop = options.getInt("marginTop");
                         marginBottom = options.getInt("marginBottom");
                         latitude = options.getDouble("lat");
-                        longitude = options.getDouble("lon");
+                        longitude = options.getDouble("lng");
                     } catch (JSONException e) {
                         LOG.e(TAG, "Error reading options");
                     }
@@ -92,7 +92,7 @@ public class MapKit extends CordovaPlugin {
                                         // than this...
                     main.addView(mapView);
                     
-                    // Moving the map to lot, lon
+                    // Moving the map to lat, lng
                     mapView.getMap().moveCamera(
                             CameraUpdateFactory.newLatLngZoom(new LatLng(
                                     latitude, longitude), 15));
@@ -165,7 +165,7 @@ public class MapKit extends CordovaPlugin {
                                 double latitude = 0, longitude = 0;
                                 JSONObject options = pins.getJSONObject(i);
                                 latitude = options.getDouble("lat");
-                                longitude = options.getDouble("lon");
+                                longitude = options.getDouble("lng");
 
                                 MarkerOptions mOptions = new MarkerOptions();
 
