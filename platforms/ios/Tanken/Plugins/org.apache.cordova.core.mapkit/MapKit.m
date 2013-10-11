@@ -229,7 +229,6 @@
     CDVAnnotation *phAnnotation=(CDVAnnotation *) view.annotation;
     NSString* jsString = nil;
     jsString = [[NSString alloc] initWithFormat:@"%@(%ld);", self.buttonCallback, (long)phAnnotation.index];
-    NSLog(jsString);
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 
