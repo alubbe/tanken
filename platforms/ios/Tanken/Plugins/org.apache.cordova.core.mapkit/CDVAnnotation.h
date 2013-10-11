@@ -21,12 +21,14 @@
 	MKPlacemark *_placemark;
 	NSString *pinColor;
 	BOOL selected;
+    BOOL showInfoWindow;
 }
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subTitle;
 @property (nonatomic, copy) NSString *imageURL;
 @property (nonatomic, copy) NSString *pinImageURL;
+@property (nonatomic, assign) BOOL showInfoWindow;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, retain) MKPlacemark *placemark;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -34,7 +36,7 @@
 @property (nonatomic, assign) BOOL selected;
 
 - (void)notifyCalloutInfo:(MKPlacemark *)placemark;
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index title:(NSString*)title subTitle:(NSString*)subTitle imageURL:(NSString*)imageURL pinImageURL:(NSString*)pinImageURL;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index title:(NSString*)title subTitle:(NSString*)subTitle imageURL:(NSString*)imageURL pinImageURL:(NSString*)pinImageURL showInfoWindow:(BOOL)showInfoWindow;
 
 @end
 

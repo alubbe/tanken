@@ -17,10 +17,11 @@
 @synthesize	imageURL = _imageURL;
 @synthesize	pinImageURL = _pinImageURL;
 @synthesize	coordinate = _coordinate;
+@synthesize showInfoWindow = _showInfoWindow;
 @synthesize	pinColor;
 @synthesize selected;
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index title:(NSString*)title subTitle:(NSString*)subTitle imageURL:(NSString*)imageURL pinImageURL:(NSString *)pinImageURL {
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index title:(NSString*)title subTitle:(NSString*)subTitle imageURL:(NSString*)imageURL pinImageURL:(NSString *)pinImageURL showInfoWindow:(BOOL)showInfoWindow{
     if ((self = [super init])) {
         _coordinate=coordinate;
         _title = title;
@@ -28,6 +29,7 @@
 		_index=index;
 		_imageURL=imageURL;
         _pinImageURL=pinImageURL;
+        _showInfoWindow=showInfoWindow;
     }
     return self;
 }

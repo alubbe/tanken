@@ -39,7 +39,7 @@ MapKit.prototype = {
 	},
 
 	markerCallback: function(marker) {
-      alert("Marker pressed!");
+      alert("Marker " + marker + " pressed!");
     }
 }
 

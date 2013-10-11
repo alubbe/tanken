@@ -111,8 +111,9 @@
 		CLLocationCoordinate2D pinCoord = { [[pinData objectForKey:@"lat"] floatValue] , [[pinData objectForKey:@"lng"] floatValue] };
 		NSString *title=[[pinData valueForKey:@"title"] description];
 		NSString *subTitle=[[pinData valueForKey:@"snippet"] description];
-		NSInteger index=[[pinData valueForKey:@"index"] integerValue];
+		NSInteger index=[[pinData valueForKey:@"id"] integerValue];
 		BOOL selected = [[pinData valueForKey:@"selected"] boolValue];
+		BOOL showInfoWindow = [[pinData valueForKey:@"showInfoWindow"] boolValue];
 
         NSString *pinColor = nil;
         NSString *imageURL = nil;
@@ -136,7 +137,7 @@
         
         }
 
-		CDVAnnotation *annotation = [[CDVAnnotation alloc] initWithCoordinate:pinCoord index:index title:title subTitle:subTitle imageURL:imageURL pinImageURL:pinImageURL];
+		CDVAnnotation *annotation = [[CDVAnnotation alloc] initWithCoordinate:pinCoord index:index title:title subTitle:subTitle imageURL:imageURL pinImageURL:pinImageURL showInfoWindow:showInfoWindow];
 		annotation.pinColor=pinColor;
 		annotation.selected = selected;
 
@@ -220,6 +221,18 @@
 }
  */
 
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    if ([view.annotation class] != CDVAnnotation.class) {
+        return;
+    }
+
+    CDVAnnotation *phAnnotation=(CDVAnnotation *) view.annotation;
+    NSString* jsString = nil;
+    jsString = [[NSString alloc] initWithFormat:@"%@(%ld);", self.buttonCallback, (long)phAnnotation.index];
+    NSLog(jsString);
+    [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+}
+
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>) annotation {
   
@@ -283,7 +296,7 @@
         }
     }
 
-    annView.canShowCallout = YES;
+    annView.canShowCallout = phAnnotation.showInfoWindow;
     if (asyncImage != nil) {
         annView.leftCalloutAccessoryView = asyncImage;
     }
@@ -311,10 +324,7 @@
 
 -(void)openAnnotation:(id <MKAnnotation>) annotation
 {
-    NSString* jsString = [NSString stringWithFormat:@"%@(\"%i\");", self.buttonCallback];
-    [self.webView stringByEvaluatingJavaScriptFromString:jsString];
-	// [ self.mapView selectAnnotation:annotation animated:YES];  
-	
+	[ self.mapView selectAnnotation:annotation animated:YES];  	
 }
 
 - (void) checkButtonTapped:(id)button 

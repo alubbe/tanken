@@ -54,7 +54,8 @@ var app = {
                   width: 50,
                   height: 50
                 },
-                icon: MapKit.iconColors.HUE_ROSE
+                icon: MapKit.iconColors.HUE_ROSE,
+                showInfoWindow: false
             },
             {
                 id: 1,
@@ -65,7 +66,8 @@ var app = {
                   type: "asset",
                   resource: "www/img/logo.png", //an image in the asset directory
                   pinColor: MapKit.iconColors.HUE_VIOLET //iOS only
-                }
+                },
+                showInfoWindow: false
             },
             {
                 id: 2,
@@ -73,7 +75,8 @@ var app = {
                 lng: -43.359003,
                 title: "Awesome Title",
                 snippet: "Awesome Snippet",
-                icon: MapKit.iconColors.HUE_GREEN
+                icon: MapKit.iconColors.HUE_GREEN,
+                showInfoWindow: false
             }
         ];
         var error = function() {
