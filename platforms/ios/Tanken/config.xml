@@ -30,5 +30,6 @@
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="OpenAllWhitelistURLsInWebView" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
-    <preference name="fullscreen" value="false" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="Fullscreen" value="false" />
 </widget>
