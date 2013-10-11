@@ -311,7 +311,9 @@
 
 -(void)openAnnotation:(id <MKAnnotation>) annotation
 {
-	[ self.mapView selectAnnotation:annotation animated:YES];  
+    NSString* jsString = [NSString stringWithFormat:@"%@(\"%i\");", self.buttonCallback];
+    [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+	// [ self.mapView selectAnnotation:annotation animated:YES];  
 	
 }
 
