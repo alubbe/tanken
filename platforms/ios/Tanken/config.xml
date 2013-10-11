@@ -20,7 +20,7 @@
     <access origin="*" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="SuppressesIncrementalRendering" value="false" />
-    <preference name="UIWebViewBounce" value="true" />
+    <preference name="UIWebViewBounce" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
     <preference name="EnableLocation" value="false" />
     <preference name="EnableViewportScale" value="false" />
@@ -31,5 +31,4 @@
     <preference name="OpenAllWhitelistURLsInWebView" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="fullscreen" value="false" />
-    <preference name="webviewbounce" value="false" />
 </widget>
