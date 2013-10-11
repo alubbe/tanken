@@ -33,6 +33,15 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        //add a 20px margin to the top of iOS7+ apps
+        if (window.device) {
+            if (window.device.version) {
+                if (parseFloat(window.device.version) >= 7) {
+                    $("#top-area").css("top", 20);
+                }        
+            }
+        }
+        
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -91,7 +100,7 @@ var app = {
         };
         
         var options = {
-            marginTop: $("#top-area").height(),
+            marginTop: $("#top-area").height() + parseInt($("#top-area").css("top")),
             marginBottom: $("#bottom-area").height(),
             markerCallback: 'MapKit.markerCallback',
             lat: -22.999521,
