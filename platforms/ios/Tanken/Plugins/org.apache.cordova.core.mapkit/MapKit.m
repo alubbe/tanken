@@ -236,17 +236,16 @@
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>) annotation {
   
-  if ([annotation class] != CDVAnnotation.class) {
-    return nil;
-  }
-
+    if ([annotation class] != CDVAnnotation.class) {
+        return nil;
+    }
+    
 	CDVAnnotation *phAnnotation=(CDVAnnotation *) annotation;
 	NSString *identifier=[NSString stringWithFormat:@"INDEX[%i]", phAnnotation.index];
 
 	MKAnnotationView *annView = (MKAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:identifier];
 
 	if (annView!=nil) return annView;
-
     
     //Load Images
 /*
@@ -314,7 +313,7 @@
 
 	}
 
-	if(phAnnotation.selected)
+	if (phAnnotation.selected)
 	{
 		[self performSelector:@selector(openAnnotation:) withObject:phAnnotation afterDelay:1.0];
 	}
@@ -322,7 +321,7 @@
 	return annView;
 }
 
--(void)openAnnotation:(id <MKAnnotation>) annotation
+-(void) openAnnotation:(id <MKAnnotation>) annotation
 {
 	[ self.mapView selectAnnotation:annotation animated:YES];  	
 }
@@ -334,7 +333,7 @@
 	[self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 
-- (void)dealloc
+- (void) dealloc
 {
     if (self.mapView)
 	{
