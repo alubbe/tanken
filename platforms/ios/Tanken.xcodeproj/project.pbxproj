@@ -50,6 +50,7 @@
 		242AF5B1894D46ADB5D58A66 /* MapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C84CA60CD24D2F89B34FBC /* MapKit.m */; };
 		1EF43C357B4141289321846A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9351C7F4F06D43A2BACCCB5D /* icon.png */; };
 		95C7151779C34179BC150E41 /* MapKit.framework in Resources */ = {isa = PBXBuildFile; fileRef = C30080485D91401DBA1B8C92 /* MapKit.framework */; };
+		0A8E50F853974A4AA0026B03 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFA56778AA94D0DB66A9958 /* CDVDevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,8 @@
 		1C87E01D4AA544ACB0AE5E78 /* MapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MapKit.h"; path = "org.apache.cordova.core.mapkit/MapKit.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		9351C7F4F06D43A2BACCCB5D /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = unknown; name = "icon.png"; path = "icon.png"; sourceTree = "<group>"; fileEncoding = 4; };
 		C30080485D91401DBA1B8C92 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MapKit.framework"; path = "System/Library/Frameworks/MapKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		2DFA56778AA94D0DB66A9958 /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		1A0CC8B3ABDC47B996E4080F /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +281,8 @@
 				BCCFD25ACF3149B4AB2FF979 /* AsyncImageView.h */,
 				7727B474F1FC434F82CDA2F0 /* CDVAnnotation.h */,
 				1C87E01D4AA544ACB0AE5E78 /* MapKit.h */,
+				2DFA56778AA94D0DB66A9958 /* CDVDevice.m */,
+				1A0CC8B3ABDC47B996E4080F /* CDVDevice.h */,
 			);
 			name = Plugins;
 			path = "Tanken/Plugins";
@@ -449,6 +454,7 @@
 				88A65EDB810C4011B48A0430 /* AsyncImageView.m in Sources */,
 				468C7F2D5C3A445385351CDA /* CDVAnnotation.m in Sources */,
 				242AF5B1894D46ADB5D58A66 /* MapKit.m in Sources */,
+				0A8E50F853974A4AA0026B03 /* CDVDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

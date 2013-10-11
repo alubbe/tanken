@@ -29,4 +29,7 @@
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
 </widget>
