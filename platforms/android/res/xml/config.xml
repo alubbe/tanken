@@ -14,12 +14,12 @@
     <feature name="MapKit">
         <param name="android-package" value="org.apache.cordova.mapkit.MapKit" />
     </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <access origin="*" />
     <preference name="useBrowserHistory" value="true" />
     <preference name="exit-on-suspend" value="false" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="false" />
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
 </widget>
