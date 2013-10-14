@@ -33,13 +33,25 @@ if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)
 			  panControl: false,
 			  }
 
-			map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			MapKit.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			MapKit.markerCallback = options.markerCallback;
 
 			success();
  		},
 
  		addMapPins: function(pins, success, error) {
- 			exec(success, error, 'MapKit', 'addMapPins', [pins]);
+ 			for(var i=0; i<pins.length; i++){
+	 			var pin = pins[i];
+	 			var marker = new google.maps.Marker({
+	 			  position: new google.maps.LatLng(pin.lat, pin.lng),
+	 			  map: MapKit.map
+	 			});
+	 			marker.id = pin.id;
+
+	 			google.maps.event.addListener(marker, "click", function() {
+	 				eval(pin.markerCallback + "('" + marker.id + "')");
+	 			});
+	 		}
  		},
 
  		clearMapPins: function(success, error) {
@@ -52,11 +64,8 @@ if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)
 
  		changeMapType: function(mapType, success, error) {
  			exec(success, error, 'MapKit', 'changeMapType', [mapType ? { "mapType": mapType } :{ "mapType": 0 }]);
- 		},
+ 		}
 
- 		markerCallback: function(marker) {
- 	      alert("Marker pressed!");
- 	    }
  	}
 
  	MapKit = new MapKit();

@@ -104,16 +104,23 @@ public class MapKit extends CordovaPlugin {
                     mapView.getMap().setOnMarkerClickListener(new OnMarkerClickListener() {
                         
                         public boolean onMarkerClick(Marker marker) {
-                            int marker_id = -1;
+                            String marker_id = "Marker ID unknown",
+                                markerCallback = "console.log";
                             JSONObject marker_options = current_pins.get(marker.getId());
                             try {
-                                marker_id = marker_options.getInt("id");
+                                marker_id = marker_options.getString("id");
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 cCtx.error("MapKitPlugin::onMarkerClick(): marker ID could not be retrieved");
                             }
-                            LOG.e(TAG, "marker " + Integer.toString(marker_id) + " touched");
-                            webView.loadUrl("javascript:window.alert('Marker " + Integer.toString(marker_id) + " touched!')");
+                            try {
+                                markerCallback = marker_options.getString("markerCallback");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                cCtx.error("MapKitPlugin::onMarkerClick(): markerCallback could not be retrieved");
+                            }
+                            LOG.e(TAG, "Marker " + marker_id + " touched");
+                            webView.loadUrl("javascript:" + markerCallback + "('" + marker_id + "');");
                             return true;
                         }
                     });

@@ -21,6 +21,7 @@ var app = {
     initialize: function() {
         this.bindEvents();
     },
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -28,6 +29,7 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -41,74 +43,34 @@ var app = {
                 }        
             }
         }
-        
+
         app.receivedEvent('deviceready');
     },
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
         app.showMap();
     },
+
     showMap: function() {
-        var pins = [
-            {
-                id: 0,
-                lat: -22.999658,
-                lng: -43.353827,
-                title: "A Cool Title",
-                snippet: "A Really Cool Snippet",
-                image: {
-                    type: "asset",
-                    resource: "www/img/logo.png",
-                  width: 50,
-                  height: 50
-                },
-                icon: MapKit.iconColors.HUE_ROSE,
-                showInfoWindow: false
-            },
-            {
-                id: 1,
-                lat: -22.999780,
-                lng: -43.348087,
-                title: "A Cool Title, with no Snippet",
-                icon: {
-                  type: "asset",
-                  resource: "www/img/logo.png", //an image in the asset directory
-                  pinColor: MapKit.iconColors.HUE_VIOLET //iOS only
-                },
-                showInfoWindow: false
-            },
-            {
-                id: 2,
-                lat: -22.998180,
-                lng: -43.359003,
-                title: "Awesome Title",
-                snippet: "Awesome Snippet",
-                icon: MapKit.iconColors.HUE_GREEN,
-                showInfoWindow: false
-            }
-        ];
         var error = function() {
           console.log('error');
         };
         var success = function() {
-          MapKit.addMapPins(pins, function() { 
-                                      console.log('adMapPins success');  
-                                      document.getElementById('clear_map_pins').style.display = 'block';
-                                  },
-                                  function() { console.log('error'); });
+          app.addGasStations(3, 5, 52.512303, 13.431191);
         };
         
         var options = {
             marginTop: $("#top-area").height() + parseInt($("#top-area").css("top")),
             marginBottom: $("#bottom-area").height(),
-            markerCallback: 'MapKit.markerCallback',
-            lat: -22.999521,
-            lng: -43.344600
+            lat: 52.512303,
+            lng: 13.431191
         };
 
         MapKit.showMap(options, success, error);
     },
+
     hideMap: function() {
         var success = function() {
           document.getElementById('hide_map').style.display = 'none';
@@ -120,6 +82,57 @@ var app = {
         };
         MapKit.hideMap(success, error);
     },
+
+    changeMapType: function() {
+      var success = function() {
+          console.log('Map Type Changed');
+        };
+        var error = function() {
+          console.log('error');
+        };
+        MapKit.changeMapType(MapKitMapType.MAP_TYPE_SATELLITE, success, error);
+    },
+
+    addGasStations: function(fuel_id, radius, lat, lon) {
+        var url = "http://mehr-tanken.de/list?result=xml&device=android&fuel_id=" + fuel_id + "&radius=" + radius + "&lon=" + lon + "&lat=" + lat + "&plz=-1";
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "xml",
+            success: function(xml) {
+                console.log("Ajax successful");
+                $(xml).find('station').each(function(){
+                    var id = $(this).attr('id'), //this is a string because int breaks on android given a certain size
+                        price = parseFloat($(this).find('fuel').attr('price_current')),
+                        lat = parseFloat($(this).find('coordinates').attr('lat')),
+                        lng = parseFloat($(this).find('coordinates').attr('lon'));
+                    app.addMapPin(id, price, lat, lng);
+                });
+            },
+            error: function(xhr, type){
+                alert('Ajax error!');
+                console.log(xhr);
+                console.log(type);
+                // should run it again.
+            }
+        });
+
+    },
+
+    addMapPin: function(id, price, lat, lng) {
+        var pin = {
+            id: id,
+            lat: lat,
+            lng: lng,
+            title: 'lol',
+            icon: MapKit.iconColors.HUE_ROSE,
+            showInfoWindow: false,
+            markerCallback: "app.markerCallback"
+        };
+        MapKit.addMapPins([pin], function(){console.log("pin added!")}, function(){console.log("pin failed");});
+    },
+
     clearMapPins: function() {
         var success = function() {
           console.log('Map Pins cleared!');
@@ -129,13 +142,9 @@ var app = {
         };
         MapKit.clearMapPins(success, error);
     },
-    changeMapType: function() {
-      var success = function() {
-          console.log('Map Type Changed');
-        };
-        var error = function() {
-          console.log('error');
-        };
-        MapKit.changeMapType(MapKitMapType.MAP_TYPE_SATELLITE, success, error);
+
+    markerCallback: function(marker_id) {
+        alert("Marker " + marker_id + " pressed!");
     }
+
 };
