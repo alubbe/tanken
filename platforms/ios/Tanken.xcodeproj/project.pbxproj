@@ -50,6 +50,7 @@
 		95C7151779C34179BC150E41 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30080485D91401DBA1B8C92 /* MapKit.framework */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
+		E4DE0B96B40E4CE9A5BA7A8E /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E6F6709BB64A1480337900 /* CDVLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,8 @@
 		C30080485D91401DBA1B8C92 /* MapKit.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Tanken/config.xml; sourceTree = "<group>"; };
+		68E6F6709BB64A1480337900 /* CDVLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLogger.m"; path = "org.apache.cordova.console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		C3176AE133464607837675C5 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +284,8 @@
 				1C87E01D4AA544ACB0AE5E78 /* MapKit.h */,
 				2DFA56778AA94D0DB66A9958 /* CDVDevice.m */,
 				1A0CC8B3ABDC47B996E4080F /* CDVDevice.h */,
+				68E6F6709BB64A1480337900 /* CDVLogger.m */,
+				C3176AE133464607837675C5 /* CDVLogger.h */,
 			);
 			name = Plugins;
 			path = Tanken/Plugins;
@@ -453,6 +458,7 @@
 				468C7F2D5C3A445385351CDA /* CDVAnnotation.m in Sources */,
 				242AF5B1894D46ADB5D58A66 /* MapKit.m in Sources */,
 				0A8E50F853974A4AA0026B03 /* CDVDevice.m in Sources */,
+				E4DE0B96B40E4CE9A5BA7A8E /* CDVLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
