@@ -103,7 +103,7 @@ var app = {
             success: function(xml) {
                 console.log("Ajax successful");
                 $(xml).find('station').each(function(){
-                    var id = $(this).attr('id'), //this is a string because int breaks on android given a certain size
+                    var id = parseInt($(this).attr('id').substring(1), 16), //convert from hex to int after cutting off the first character - otherwise the int is possibly larger than 2,147,483,647
                         price = parseFloat($(this).find('fuel').attr('price_current')),
                         lat = parseFloat($(this).find('coordinates').attr('lat')),
                         lng = parseFloat($(this).find('coordinates').attr('lon'));
