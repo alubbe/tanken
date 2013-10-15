@@ -42,10 +42,6 @@
     float x = self.webView.bounds.origin.x;
     float y = self.webView.bounds.origin.y + marginTop;
 
-    if ([options objectForKey:@"markerCallback"]) {
-        self.buttonCallback=[[options objectForKey:@"markerCallback"] description];
-    }
-
     self.childView = [[UIView alloc] initWithFrame:CGRectMake(x,y,width,height)];
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(self.childView.bounds.origin.x, self.childView.bounds.origin.x, self.childView.bounds.size.width, self.childView.bounds.size.height)];
     self.mapView.delegate = self;
@@ -141,6 +137,10 @@
 		annotation.pinColor=pinColor;
 		annotation.selected = selected;
 
+        if ([[pinData valueForKey:@"markerCallback"] isKindOfClass:[NSString class]]) {
+            annotation.markerCallback=[pinData valueForKey:@"markerCallback"];
+        }
+        
 		[self.mapView addAnnotation:annotation];
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 	}
@@ -229,6 +229,7 @@
     CDVAnnotation *phAnnotation=(CDVAnnotation *) view.annotation;
     NSString* jsString = nil;
     jsString = [[NSString alloc] initWithFormat:@"%@(%ld);", self.buttonCallback, (long)phAnnotation.index];
+    jsString = [[NSString alloc] initWithFormat:@"%@(%ld);", phAnnotation.markerCallback, (long)phAnnotation.index];
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 

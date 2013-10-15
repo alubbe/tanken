@@ -20,6 +20,7 @@
 	NSInteger _index;
 	MKPlacemark *_placemark;
 	NSString *pinColor;
+	NSString *markerCallback;
 	BOOL selected;
     BOOL showInfoWindow;
 }
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) MKPlacemark *placemark;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *pinColor;
+@property (nonatomic, copy) NSString *markerCallback;
 @property (nonatomic, assign) BOOL selected;
 
 - (void)notifyCalloutInfo:(MKPlacemark *)placemark;
