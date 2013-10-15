@@ -65,7 +65,8 @@ var app = {
             marginTop: $("#top-area").height() + parseInt($("#top-area").css("top")),
             marginBottom: $("#bottom-area").height(),
             lat: 52.512303,
-            lng: 13.431191
+            lng: 13.431191,
+            diameter: 5000
         };
 
         MapKit.showMap(options, success, error);
