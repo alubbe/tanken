@@ -45,6 +45,12 @@ public class MapKit extends CordovaPlugin {
         current_pins = new Hashtable<String, JSONObject>();
     }
 
+    private int px(float dips)
+    {
+        float DP = cordova.getActivity().getResources().getDisplayMetrics().density;
+        return Math.round(dips * DP);
+    }
+
     public void showMap(final JSONObject options) {
         try {
         	final MapKit me = this;
@@ -84,7 +90,7 @@ public class MapKit extends CordovaPlugin {
                                 RelativeLayout.TRUE);
                     params.addRule(RelativeLayout.CENTER_HORIZONTAL,
                             RelativeLayout.TRUE);
-                    params.setMargins(0, marginTop, 0, marginBottom);
+                    params.setMargins(0, px(marginTop), 0, px(marginBottom));
 
                     mapView.setLayoutParams(params);
                     mapView.onCreate(null);
